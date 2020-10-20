@@ -71,21 +71,23 @@ public:
 
     bool DFS(string &searchWord, int index, int diffCount, TrieDict *node) {
         if (index == searchWord.size()) {
-            return diffCount == 1 && node->IsEnd();
+            return diffCount == 0 && node->IsEnd();
         }
         for (int i = 0; i < MAX_LEN; i++) {
             if (node->GetNodeList()[i] == nullptr) {
                 continue;
             }
             if (i == (searchWord[index] - 'a')) {
-                return DFS(searchWord, index+1, diffCount, node->GetNodeList()[i]);
-            } else {
-                if ((diffCount - 1) < 0) {
-                    return false;
+                if (DFS(searchWord, index+1, diffCount, node->GetNodeList()[i])) {
+                    return true;
                 }
-                return DFS(searchWord, index+1, diffCount - 1, node->GetNodeList()[i]);
+            } else {
+                if ((diffCount - 1) >= 0 && DFS(searchWord, index+1, diffCount - 1, node->GetNodeList()[i])) {
+                    return true;
+                }
             }
         }
+        return false;
     }
 
     bool search(string searchWord) {
@@ -94,14 +96,16 @@ public:
         }
         return DFS(searchWord, 0, 1, this->root_);
     }
-
-
 };
 
 void TestForMagicDict() {
     MagicDictionary *magicDictionary = new MagicDictionary();
-    vector<string> dict{"hello", "leetcode"};
+    vector<string> dict{"hello","hallo","leetcode","judge", "judgg"};
     magicDictionary->buildDict(dict);
-    bool res = magicDictionary->search("hello");
-    printf("Res: %d", res);
+
+    vector<string> searchs{"hello", "hallo", "hell", "leetcodd", "judge", "juggg"};
+    for (auto s : searchs) {
+        bool res = magicDictionary->search(s);
+        printf("Search:%s, Res: %s\n", s.c_str(), res ? "true" : "false");
+    }
 }
