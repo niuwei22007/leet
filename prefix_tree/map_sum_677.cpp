@@ -17,8 +17,9 @@ class TrieMapSum {
 private:
     array<TrieMapSum *, MAX_LEN> next_{nullptr};
     int val_ = 0;
+    bool isEnd_ = false;
 public:
-    explicit TrieMapSum(bool val = false) : val_(val) {
+    explicit TrieMapSum(int val = 0) : val_(val) {
 
     }
 
@@ -44,6 +45,14 @@ public:
         return this->val_;
     }
 
+    void SetEnd(bool end) {
+        this->isEnd_ = end;
+    }
+
+    bool IsEnd() {
+        return this->isEnd_;
+    }
+
     array<TrieMapSum *, MAX_LEN> GetNodeList() const {
         return this->next_;
     }
@@ -66,10 +75,11 @@ public:
             tmp = tmp->Get(c);
         }
         tmp->SetValue(val);
+        tmp->SetEnd(true);
     }
 
     void DFS(TrieMapSum *node, int &sum) {
-        if (node != nullptr) {
+        if (node->IsEnd()) {
             sum += node->GetValue();
         }
         for (auto n : node->GetNodeList()) {
