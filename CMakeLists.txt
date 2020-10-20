@@ -3,8 +3,15 @@ project(TrustDo)
 
 set(CMAKE_CXX_STANDARD 11)
 
-#include_directories(
+include_directories(
+        trust.h
 #        ${PROJECT_SOURCE_DIR}/../../opt/android-ndk-r20b/sysroot/usr/include
-#)
+)
 
-add_executable(LeetCode main.cpp trust.h prefix_tree/trie_208.cpp prefix_tree/word_replace_648.cpp prefix_tree/magic_dict_676.cpp contains_npu.cpp prefix_tree/map_sum_677.cpp)
+file(GLOB SRC0 *.cpp)
+file(GLOB SRC1 */*.cpp)
+
+add_executable(LeetCode
+        ${SRC0}
+        ${SRC1}
+        )
