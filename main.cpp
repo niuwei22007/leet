@@ -6,6 +6,7 @@ int main() {
 //    TestForMagicDict();
 //    TestForLongestWord();
 //    TestForLongestWord();
-    TestForTrieSearch();
+//    TestForTrieSearch();
+    TestForPartSearch();
     return 0;
 }
