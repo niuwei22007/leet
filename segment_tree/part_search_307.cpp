@@ -19,28 +19,28 @@ namespace partsearch {
             BuildTree(nums);
         }
 
-        static int LeftChild(int i) {
+        static inline int LeftChild(int i) {
             return i * 2;
         }
 
-        static int IsLeft(int i) {
+        static inline int IsLeft(int i) {
             return i % 2 == 0;
         }
 
-        static int RightChild(int i) {
+        static inline int RightChild(int i) {
             return i * 2 + 1;
         }
 
-        static int IsRight(int i) {
+        static inline int IsRight(int i) {
             return i % 2 == 1;
         }
 
-        static int ParentIndex(int i) {
+        static inline int ParentIndex(int i) {
             return i / 2;
         }
 
 
-        int TreeIndex(int i) {
+        inline int TreeIndex(int i) const {
             return i + size_;
         }
 
