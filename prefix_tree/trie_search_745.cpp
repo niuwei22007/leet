@@ -108,9 +108,121 @@ namespace triesearch {
     };
 }
 
+namespace triesearch2 {
+    class TrieNode {
+    private:
+        static const int MAX_LEN = 27;
+        array<TrieNode *, MAX_LEN> next_{nullptr};
+        int weight_ = -1;
+//        char c_;
+    public:
+        explicit TrieNode(int weight = -1) : weight_(weight) {
+
+        }
+
+        bool Find(char c) {
+            if (c == '#') {
+                return next_[26] != nullptr;
+            }
+            return (next_[c - 'a'] != nullptr);
+        }
+
+        TrieNode *Get(char c) {
+            if (c == '#') {
+                return next_[26];
+            }
+            return next_[c - 'a'];
+        }
+
+        void Add(char c) {
+            if (!Find(c)) {
+                if (c == '#') {
+                    next_[26] = new TrieNode();
+                } else {
+                    next_[c - 'a'] = new TrieNode();
+                }
+            }
+        }
+
+        void SetWeight(int weight) {
+            this->weight_ = weight;
+        }
+
+        int GetWeight() {
+            return this->weight_;
+        }
+
+        bool IsEnd() {
+            return this->weight_ > -1;
+        }
+
+        array<TrieNode *, MAX_LEN> GetNodeList() const {
+            return this->next_;
+        }
+    };
+
+    class WordFilter {
+    private:
+        TrieNode *root_;
+        vector<string> words_;
+    public:
+        WordFilter(vector<string> &words) {
+            this->root_ = new TrieNode();
+            this->words_ = words;
+            for (int i = 0; i < words.size(); i++) {
+                string s = words[i] + "#" + words[i];
+                for (int j = 0; j < s.size(); j++) {
+                    this->Insert(words[i], j, i);
+                }
+            }
+        }
+
+        int f(string prefix, string suffix) {
+            auto tmp = this->root_;
+            for (auto c : prefix) {
+                if (!tmp->Find(c)) {
+                    return -1;
+                }
+                tmp = tmp->Get(c);
+            }
+            int max = -1;
+            DFS(tmp, suffix, max);
+            return max;
+        }
+
+        bool EndWith(string &context, string &suffix) {
+            return context.size() >= suffix.size() &&
+                   context.compare(context.size() - suffix.size(), suffix.size(), suffix) == 0;
+        }
+
+        void Insert(string &word, int start, int weight) {
+            auto tmp = root_;
+            int level = 0;
+            for (int i = start; i < word.size(); i++) {
+                tmp->Add(word[i]);
+                level++;
+                tmp = tmp->Get(word[i]);
+            }
+            tmp->SetWeight(max(weight, tmp->GetWeight()));
+        }
+
+        void DFS(TrieNode *node, string &suffix, int &max) {
+            if (node->GetWeight() > max) {
+                max = node->GetWeight();
+            }
+            for (auto n : node->GetNodeList()) {
+                if (n != nullptr) {
+                    DFS(n, suffix, max);
+                }
+            }
+        }
+
+    };
+}
+
 void TestForTrieSearch() {
     vector<string> list = {"apple", "hello", "abcde"};
-    auto *obj = new triesearch::WordFilter(list);
+    auto *obj = new triesearch2::WordFilter(list);
     int result = obj->f("a", "d");
     printf("Result: %d|", result);
 }
