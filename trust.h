@@ -9,4 +9,5 @@ void TestForTrie();
 void TestForWordReplace();
 void TestForMagicDict();
 void TestForLongestWord();
+void TestForTrieSearch();
 #endif //TRUSTDO_TRUST_H

@@ -102,8 +102,13 @@ namespace mapsum {
             return sum;
         }
 
-        bool StartWith(string context, string &prefix) {
+        bool StartWith(string &context, string &prefix) {
             return context.compare(0, prefix.size(), prefix) == 0;
+        }
+
+        bool EndWith(string &context, string &suffix) {
+            return context.size() >= suffix.size() &&
+                   context.compare(context.size() - suffix.size(), suffix.size(), suffix) == 0;
         }
 
         void insert(string key, int val) {
