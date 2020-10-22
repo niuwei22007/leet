@@ -12,4 +12,5 @@ void TestForLongestWord();
 void TestForTrieSearch();
 void TestForPartSearch();
 void TestForStockSpanner();
+void TestForSubArray();
 #endif //TRUSTDO_TRUST_H
