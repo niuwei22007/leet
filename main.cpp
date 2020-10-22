@@ -9,6 +9,7 @@ int main() {
 //    TestForTrieSearch();
 //    TestForPartSearch();
 //    TestForStockSpanner();
-    TestForSubArray();
+//    TestForSubArray();
+    TestForNextLarger();
     return 0;
 }

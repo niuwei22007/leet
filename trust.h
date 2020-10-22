@@ -13,4 +13,5 @@ void TestForTrieSearch();
 void TestForPartSearch();
 void TestForStockSpanner();
 void TestForSubArray();
+void TestForNextLarger();
 #endif //TRUSTDO_TRUST_H
