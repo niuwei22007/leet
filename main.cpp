@@ -7,6 +7,7 @@ int main() {
 //    TestForLongestWord();
 //    TestForLongestWord();
 //    TestForTrieSearch();
-    TestForPartSearch();
+//    TestForPartSearch();
+    TestForStockSpanner();
     return 0;
 }

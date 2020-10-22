@@ -11,4 +11,5 @@ void TestForMagicDict();
 void TestForLongestWord();
 void TestForTrieSearch();
 void TestForPartSearch();
+void TestForStockSpanner();
 #endif //TRUSTDO_TRUST_H
