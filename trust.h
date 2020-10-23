@@ -14,4 +14,5 @@ void TestForPartSearch();
 void TestForStockSpanner();
 void TestForSubArray();
 void TestForNextLarger();
+void TestForPhoneNumber();
 #endif //TRUSTDO_TRUST_H

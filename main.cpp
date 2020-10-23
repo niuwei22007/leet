@@ -10,6 +10,7 @@ int main() {
 //    TestForPartSearch();
 //    TestForStockSpanner();
 //    TestForSubArray();
-    TestForNextLarger();
+//    TestForNextLarger();
+    TestForPhoneNumber();
     return 0;
 }
