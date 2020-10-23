@@ -10,8 +10,10 @@ include_directories(
 
 file(GLOB SRC0 *.cpp)
 file(GLOB SRC1 */*.cpp)
+file(GLOB SRC2 */*/*.cpp)
 
 add_executable(LeetCode
         ${SRC0}
         ${SRC1}
+        ${SRC2}
         )
