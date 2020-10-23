@@ -17,4 +17,5 @@ void TestForNextLarger();
 void TestForPhoneNumber();
 void TestForCombineNum();
 void TestForCombineNum2();
+void TestForCombine77();
 #endif //TRUSTDO_TRUST_H
