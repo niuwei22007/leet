@@ -14,6 +14,7 @@ int main() {
 //    TestForPhoneNumber();
 //    TestForCombineNum();
 //    TestForCombineNum2();
-    TestForCombine77();
+//    TestForCombine77();
+    TestForCombine78();
     return 0;
 }
