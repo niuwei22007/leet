@@ -1,7 +1,7 @@
 //
 // Created by 鞋底洞 on 2020/10/20.
 //
-#include "../trust.h"
+#include "../../trust.h"
 #include <array>
 #include <string>
 #include <vector>
