@@ -16,4 +16,5 @@ void TestForSubArray();
 void TestForNextLarger();
 void TestForPhoneNumber();
 void TestForCombineNum();
+void TestForCombineNum2();
 #endif //TRUSTDO_TRUST_H

@@ -12,6 +12,7 @@ int main() {
 //    TestForSubArray();
 //    TestForNextLarger();
 //    TestForPhoneNumber();
-    TestForCombineNum();
+//    TestForCombineNum();
+    TestForCombineNum2();
     return 0;
 }

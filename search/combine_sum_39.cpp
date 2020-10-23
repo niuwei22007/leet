@@ -17,18 +17,19 @@ class Solution {
     int tmp_;
 public:
     void DFS(int target, int candIndex) {
-        if (candIndex == this->candidates_.size()) {
-            return;
-        }
         if (target == 0) {
             this->result_.push_back(this->combine_);
             return;
         }
+        if (target < 0) {
+            return;
+        }
+        if (candIndex == this->candidates_.size()) {
+            return;
+        }
 
         // skip
-        if ((candIndex + 1) < this->candidates_.size() && target >= this->candidates_[candIndex + 1]) {
-            DFS(target, candIndex + 1);
-        }
+        DFS(target, candIndex + 1);
 
         this->tmp_ = target - this->candidates_[candIndex];
         if (this->tmp_ >= 0) {
