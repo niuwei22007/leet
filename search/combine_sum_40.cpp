@@ -14,7 +14,6 @@ class Solution {
     vector<vector<int>> result_;
     vector<int> candidates_;
     vector<int> combine_;
-    int tmp_;
 public:
     void DFS(int target, int candIndex) {
         if (target == 0) {
