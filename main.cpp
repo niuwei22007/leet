@@ -11,6 +11,7 @@ int main() {
 //    TestForStockSpanner();
 //    TestForSubArray();
 //    TestForNextLarger();
-    TestForPhoneNumber();
+//    TestForPhoneNumber();
+    TestForCombineNum();
     return 0;
 }
