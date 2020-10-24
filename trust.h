@@ -21,6 +21,7 @@
 //void TestForCombine78();
 //void TestForSubset2();
 //void TestForCombineNum3();
-void TestForPermutation();
+//void TestForPermutation();
+void TestForPermutation2();
 
 #endif //TRUSTDO_TRUST_H

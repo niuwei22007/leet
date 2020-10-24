@@ -18,6 +18,8 @@ int main() {
 //    TestForCombine78();
 //    TestForSubset2();
 //    TestForCombineNum3();
-    TestForPermutation();
+//    TestForPermutation();
+    TestForPermutation2();
+
     return 0;
 }
