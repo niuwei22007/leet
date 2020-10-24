@@ -20,4 +20,5 @@ void TestForCombineNum2();
 void TestForCombine77();
 void TestForCombine78();
 void TestForSubset2();
+void TestForCombineNum3();
 #endif //TRUSTDO_TRUST_H
