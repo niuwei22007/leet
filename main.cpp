@@ -19,7 +19,8 @@ int main() {
 //    TestForSubset2();
 //    TestForCombineNum3();
 //    TestForPermutation();
-    TestForPermutation2();
+//    TestForPermutation2();
+    TestForLetterPermutation();
 
     return 0;
 }

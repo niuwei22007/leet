@@ -22,6 +22,7 @@
 //void TestForSubset2();
 //void TestForCombineNum3();
 //void TestForPermutation();
-void TestForPermutation2();
+//void TestForPermutation2();
+void TestForLetterPermutation();
 
 #endif //TRUSTDO_TRUST_H
