@@ -11,7 +11,7 @@
 using namespace std;
 namespace shortest_superstring {
 class Solution {
-    int strLength_;
+    int N_;
     int bestLength_;
     vector<int> bestPath_;
     vector<vector<int>> minLength_;
@@ -27,9 +27,9 @@ public:
     }
 
     void InitMinLength(vector<string> &A) {
-        minLength_ = vector<vector<int>>(strLength_, vector<int>(strLength_));
-        for (int i = 0; i < strLength_; ++i) {
-            for (int j = 0; j < strLength_; ++j) {
+        minLength_ = vector<vector<int>>(N_, vector<int>(N_));
+        for (int i = 0; i < N_; ++i) {
+            for (int j = i + 1; j < N_; ++j) {
                 minLength_[i][j] = Overlap(A[i], A[j]);
                 minLength_[j][i] = Overlap(A[j], A[i]);
             }
@@ -40,12 +40,12 @@ public:
         if (curLen >= bestLength_) {
             return;
         }
-        if (depth >= strLength_) {
+        if (depth >= N_) {
             bestLength_ = curLen;
             bestPath_ = curPath;
             return;
         }
-        for (int i = 0; i < strLength_; i++) {
+        for (int i = 0; i < N_; i++) {
             if (used & (1 << i)) {
                 continue;
             }
@@ -59,17 +59,9 @@ public:
     }
 
     string ShortestWithDFS(vector<string> &A) {
-        if (A.empty()) {
-            return "";
-        }
-        if (A.size() == 1) {
-            return A[0];
-        }
-        strLength_ = A.size();
-        InitMinLength(A);
         bestLength_ = INT_MAX;
-        bestPath_ = vector<int>(strLength_);
-        vector<int> curPath(strLength_);
+        bestPath_ = vector<int>(N_);
+        vector<int> curPath(N_);
         int used = 0;
         DFS(A, 0, used, 0, curPath);
 
@@ -82,8 +74,58 @@ public:
         return ans;
     }
 
+    string ShortestWithDP(vector<string> &A) {
+        vector<vector<int>> dp(1 << N_, vector<int>(N_, INT_MAX / 2));
+        vector<vector<int>> path(1 << N_, vector<int>(N_, -1));
+        for (int i = 0; i < N_; i++) {
+            dp[1 << i][i] = A[i].size();
+        }
+        // emun each state
+        for (int s = 1; s < (1 << N_); s++) {
+            for (int i = 0; i < N_; i++) {
+                if ((s & (1 << i)) == 0) {
+                    continue;
+                }
+                int prev = s - (1 << i);
+                for (int j = 0; j < N_; j++) {
+                    if (j == i || (s & (1 << j)) == 0) {
+                        continue;
+                    }
+                    if (dp[prev][j] + minLength_[j][i] < dp[s][i]) {
+                        dp[s][i] = dp[prev][j] + minLength_[j][i];
+                        path[s][i] = j;
+                    }
+                }
+            }
+        }
+
+        int cur = min_element(begin(dp.back()), end(dp.back())) - begin(dp.back());
+        int s = (1 << N_) - 1;
+        string ans;
+        while(s) {
+            int prev = path[s][cur];
+            if (prev < 0) {
+                ans = A[cur] + ans;
+            } else {
+                ans = A[cur].substr(A[cur].size() - minLength_[prev][cur]) + ans;
+            }
+            s &= ~(1 << cur);
+            cur = prev;
+        }
+
+        return ans;
+    }
+
     string shortestSuperstring(vector<string> &A) {
-        return ShortestWithDFS(A);
+        if (A.empty()) {
+            return "";
+        }
+        if (A.size() == 1) {
+            return A[0];
+        }
+        N_ = A.size();
+        InitMinLength(A);
+        return ShortestWithDP(A);
     }
 };
 }
