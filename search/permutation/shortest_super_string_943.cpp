@@ -58,7 +58,7 @@ public:
         }
     }
 
-    string shortestSuperstring(vector<string> &A) {
+    string ShortestWithDFS(vector<string> &A) {
         if (A.empty()) {
             return "";
         }
@@ -80,6 +80,10 @@ public:
             ans += A[next].substr(A[next].size() - minLength_[pre][next]);
         }
         return ans;
+    }
+
+    string shortestSuperstring(vector<string> &A) {
+        return ShortestWithDFS(A);
     }
 };
 }
