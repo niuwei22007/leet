@@ -20,7 +20,8 @@ int main() {
 //    TestForCombineNum3();
 //    TestForPermutation();
 //    TestForPermutation2();
-    TestForLetterPermutation();
+//    TestForLetterPermutation();
+    TestForShortesSuperString();
 
     return 0;
 }
