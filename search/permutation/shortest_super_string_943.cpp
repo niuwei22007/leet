@@ -10,7 +10,7 @@
 
 using namespace std;
 namespace shortest_superstring {
-class Solution {
+class Solution1 {
     int N_;
     int bestLength_;
     vector<int> bestPath_;
@@ -128,11 +128,154 @@ public:
         return ShortestWithDP(A);
     }
 };
+
+class Solution {
+    vector<vector<int>> dp_;
+    vector<vector<int>> path_;
+    vector<vector<int>> w_;
+    vector<int> bestPath_;
+    int bestLength_;
+public:
+    int Overlap(string &si, string &sj) {
+        for (int i = min(si.size(), sj.size()) - 1; i > 0; i--) {
+            if (si.substr(si.size() - i) == sj.substr(0, i)) {
+                return sj.size() - i;
+            }
+        }
+        return sj.size();
+    }
+
+    void DFS(vector<string> &A, int depth, int used, int curLength, vector<int> &curPath) {
+        if (curLength >= bestLength_) {
+            return;
+        }
+        if (depth >= A.size()) {
+            bestLength_ = curLength;
+            bestPath_ = curPath;
+            return;
+        }
+        for (int i = 0; i < A.size(); i++) {
+            if (used & (1 << i)) {
+                continue;
+            }
+            curPath[depth] = i;
+            DFS(A,
+                depth + 1,
+                used | (1 << i),
+                depth == 0 ? A[i].size() : curLength + w_[curPath[depth - 1]][i],
+                curPath
+            );
+        }
+    }
+
+    string shortestSuperstringDFS(vector<string> &A) {
+        if (A.empty()) {
+            return "";
+        }
+        if (A.size() == 1) {
+            return A[0];
+        }
+        const int N = A.size();
+        w_ = vector<vector<int>>(N, vector<int>(N));
+        for (int i = 0; i < N; ++i) {
+            for (int j = i; j < N; j++) {
+                w_[i][j] = Overlap(A[i], A[j]);
+                w_[j][i] = Overlap(A[j], A[i]);
+            }
+        }
+
+        // DO  DFS
+        bestLength_ = INT_MAX;
+        bestPath_ = vector<int>(N);
+        vector<int> curPath(N, -1);
+        DFS(A, 0, 0, 0, curPath);
+
+        // backtrack
+        string ans = A[bestPath_[0]];
+        for (int i = 1; i < bestPath_.size(); ++i) {
+            int prev = bestPath_[i - 1];
+            int next = bestPath_[i];
+            ans += A[next].substr(A[next].size() - w_[prev][next]);
+        }
+        return ans;
+    }
+
+    string shortestSuperstring(vector<string> &A) {
+        if (A.empty()) {
+            return "";
+        }
+        if (A.size() == 1) {
+            return A[0];
+        }
+        const int N = A.size();
+        const int M = 1 << N;
+        w_ = vector<vector<int>>(N, vector<int>(N));
+        for (int i = 0; i < N; ++i) {
+            for (int j = i; j < N; j++) {
+                w_[i][j] = Overlap(A[i], A[j]);
+                w_[j][i] = Overlap(A[j], A[i]);
+            }
+        }
+
+        // DO DP
+        dp_ = vector<vector<int>>(M, vector<int>(N, INT_MAX / 2));
+        path_ = vector<vector<int>>(M, vector<int>(N, -1));
+
+        // init dp array
+        for (int i = 0; i < N; i++) {
+            dp_[1 << i][i] = A[i].size();
+        }
+
+        // transaction
+        for (int k = 0; k < M; k++) {
+            for (int i = 0; i < N; ++i) {
+                if ((k & (1 << i)) == 0) {
+                    continue;
+                }
+//                int kjj = k & (~(1 << i));
+                int kj = k - (1 << i);
+//                printf("kjj:%d, kj:%d\n", kjj, kj);
+                for (int j = 0; j < N; ++j) {
+                    if (j == i || (k & (1 << j)) == 0) {
+                        continue;
+                    }
+                    // do trans
+                    if ((dp_[kj][j] + w_[j][i]) < dp_[k][i]) {
+                        dp_[k][i] = dp_[kj][j] + w_[j][i];
+                        path_[k][i] = j;
+                    }
+                }
+            }
+        }
+
+        // backtrack
+        auto best = dp_.back();
+        int current = min_element(best.begin(), best.end()) - best.begin();
+        int index = N - 1;
+        int states = M - 1;
+        bestPath_ = vector<int>(N);
+        bestPath_[index] = current;
+        while (index > 0) {
+            int prev = path_[states][current];
+            bestPath_[--index] = prev;
+            states -= (1 << current);
+            current = prev;
+        }
+        string ans = A[bestPath_[0]];
+        for (int i = 1; i < bestPath_.size(); ++i) {
+            int prev = bestPath_[i - 1];
+            int next = bestPath_[i];
+            ans += A[next].substr(A[next].size() - w_[prev][next]);
+        }
+        return ans;
+    }
+};
 }
 
 void TestForShortesSuperString() {
     auto *obj = new shortest_superstring::Solution();
-    vector<string> strs{"catg", "ctaagt", "gcta", "ttca", "atgcatc"};
+//    vector<string> strs{"catg", "ctaagt", "gcta", "ttca", "atgcatc"};
+    vector<string> strs{"alex","loves","leetcode"};
     auto result = obj->shortestSuperstring(strs);
     printf("%s\n", result.c_str());
 }
