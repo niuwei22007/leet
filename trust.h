@@ -24,6 +24,7 @@
 //void TestForPermutation();
 //void TestForPermutation2();
 //void TestForLetterPermutation();
-void TestForShortesSuperString();
+//void TestForShortesSuperString();
+void TestForSquareNum();
 
 #endif //TRUSTDO_TRUST_H

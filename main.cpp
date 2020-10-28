@@ -21,7 +21,8 @@ int main() {
 //    TestForPermutation();
 //    TestForPermutation2();
 //    TestForLetterPermutation();
-    TestForShortesSuperString();
+//    TestForShortesSuperString();
+    TestForSquareNum();
 
     return 0;
 }
