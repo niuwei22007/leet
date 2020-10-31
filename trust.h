@@ -26,6 +26,7 @@
 //void TestForLetterPermutation();
 //void TestForShortesSuperString();
 //void TestForSquareNum();
-void TestForGenerateParenth();
+//void TestForGenerateParenth();
+void TestForInvalidParenth();
 
 #endif //TRUSTDO_TRUST_H

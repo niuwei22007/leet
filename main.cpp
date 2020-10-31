@@ -23,7 +23,8 @@ int main() {
 //    TestForLetterPermutation();
 //    TestForShortesSuperString();
 //    TestForSquareNum();
-    TestForGenerateParenth();
+//    TestForGenerateParenth();
+    TestForInvalidParenth();
 
     return 0;
 }
