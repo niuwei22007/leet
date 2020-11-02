@@ -24,7 +24,8 @@ int main() {
 //    TestForShortesSuperString();
 //    TestForSquareNum();
 //    TestForGenerateParenth();
-    TestForInvalidParenth();
+//    TestForInvalidParenth();
+    TestForSudokuSolver();
 
     return 0;
 }

@@ -27,6 +27,7 @@
 //void TestForShortesSuperString();
 //void TestForSquareNum();
 //void TestForGenerateParenth();
-void TestForInvalidParenth();
+//void TestForInvalidParenth();
+void TestForSudokuSolver();
 
 #endif //TRUSTDO_TRUST_H
