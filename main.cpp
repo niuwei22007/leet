@@ -25,7 +25,8 @@ int main() {
 //    TestForSquareNum();
 //    TestForGenerateParenth();
 //    TestForInvalidParenth();
-    TestForSudokuSolver();
+//    TestForSudokuSolver();
+    TestForQueenSolver();
 
     return 0;
 }
