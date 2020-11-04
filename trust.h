@@ -29,6 +29,7 @@
 //void TestForGenerateParenth();
 //void TestForInvalidParenth();
 //void TestForSudokuSolver();
-void TestForQueenSolver();
+//void TestForQueenSolver();
+void TestForQueenSolver2();
 
 #endif //TRUSTDO_TRUST_H

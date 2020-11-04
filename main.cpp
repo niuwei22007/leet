@@ -26,7 +26,8 @@ int main() {
 //    TestForGenerateParenth();
 //    TestForInvalidParenth();
 //    TestForSudokuSolver();
-    TestForQueenSolver();
+//    TestForQueenSolver();
+    TestForQueenSolver2();
 
     return 0;
 }
