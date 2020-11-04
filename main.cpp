@@ -28,7 +28,8 @@ int main() {
 //    TestForSudokuSolver();
 //    TestForQueenSolver();
 //    TestForQueenSolver2();
-    TestForSearchWord();
+//    TestForSearchWord();
+    TestForSearchWord2();
 
     return 0;
 }

@@ -31,6 +31,7 @@
 //void TestForSudokuSolver();
 //void TestForQueenSolver();
 //void TestForQueenSolver2();
-void TestForSearchWord();
+//void TestForSearchWord();
+void TestForSearchWord2();
 
 #endif //TRUSTDO_TRUST_H
