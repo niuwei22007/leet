@@ -55,9 +55,6 @@ public:
     }
 
     int totalNQueens(int n) {
-        if (n <= 3) {
-            return 0;
-        }
         bone_ = vector<bitset<MAX_LEN>>(n, bitset<MAX_LEN>(0));
         int result = 0;
         DFS(n, 0, result);
