@@ -30,6 +30,7 @@
 //void TestForInvalidParenth();
 //void TestForSudokuSolver();
 //void TestForQueenSolver();
-void TestForQueenSolver2();
+//void TestForQueenSolver2();
+void TestForSearchWord();
 
 #endif //TRUSTDO_TRUST_H
