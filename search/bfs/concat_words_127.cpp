@@ -62,6 +62,53 @@ public:
     }
 
 
+    int BiBFS(int begin, int end) {
+        vector<int> disB(numId_, INT_MAX);
+        queue<int> bq;
+        bq.push(begin);
+        disB[begin] = 0;
+
+        vector<int> disE(numId_, INT_MAX);
+        queue<int> eq;
+        eq.push(end);
+        disE[end] = 0;
+
+
+        while (!bq.empty() && !eq.empty()) {
+            int bqSize = bq.size();
+            for (int i = 0; i < bqSize; i++) {
+                int bid = bq.front();
+                bq.pop();
+                if (disE[bid] != INT_MAX) {
+                    return (disB[bid] + disE[bid]) / 2 + 1;
+                }
+                for (auto &bbid : edges_[bid]) {
+                    if (disB[bbid] == INT_MAX) {
+                        disB[bbid] = disB[bid] + 1;
+                        bq.push(bbid);
+                    }
+                }
+            }
+
+
+            int eqSize = eq.size();
+            for (int i = 0; i < eqSize; i++) {
+                int eid = eq.front();
+                eq.pop();
+                if (disB[eid] != INT_MAX) {
+                    return (disB[eid] + disE[eid]) / 2 + 1;
+                }
+                for (auto &eeid : edges_[eid]) {
+                    if (disE[eeid] == INT_MAX) {
+                        disE[eeid] = disE[eid] + 1;
+                        eq.push(eeid);
+                    }
+                }
+            }
+        }
+        return 0;
+    }
+
     int ladderLength(string beginWord, string endWord, vector<string> &wordList) {
         if (wordList.empty()) {
             return 0;
@@ -75,7 +122,7 @@ public:
         }
         AddEdge(endWord);
 
-        return BFS(dict_[beginWord], dict_[endWord]);
+        return BiBFS(dict_[beginWord], dict_[endWord]);
     }
 };
 }
