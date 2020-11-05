@@ -1,6 +1,8 @@
 #include "trust.h"
 
 int main() {
+
+    TestForConcatWords();
 //    TestForTrie();
 //    TestForWordReplace();
 //    TestForMagicDict();
@@ -29,7 +31,7 @@ int main() {
 //    TestForQueenSolver();
 //    TestForQueenSolver2();
 //    TestForSearchWord();
-    TestForSearchWord2();
+//    TestForSearchWord2();
 
     return 0;
 }

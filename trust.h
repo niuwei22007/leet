@@ -5,6 +5,8 @@
 #ifndef TRUSTDO_TRUST_H
 #define TRUSTDO_TRUST_H
 
+
+void TestForConcatWords();
 //void TestForTrie();
 //void TestForWordReplace();
 //void TestForMagicDict();
@@ -32,6 +34,6 @@
 //void TestForQueenSolver();
 //void TestForQueenSolver2();
 //void TestForSearchWord();
-void TestForSearchWord2();
+//void TestForSearchWord2();
 
 #endif //TRUSTDO_TRUST_H
