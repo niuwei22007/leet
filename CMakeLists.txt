@@ -5,13 +5,15 @@ set(CMAKE_CXX_STANDARD 11)
 
 include_directories(
         trust.h
-#        ${PROJECT_SOURCE_DIR}/../../opt/android-ndk-r20b/sysroot/usr/include
+        #        ${PROJECT_SOURCE_DIR}/../../opt/android-ndk-r20b/sysroot/usr/include
 )
 
 file(GLOB SRC0 *.cpp)
 file(GLOB SRC_s_d search/dfs/*.cpp)
+file(GLOB SRC_s_b search/bfs/*.cpp)
 
 add_executable(LeetCode
         ${SRC0}
-        ${SRC_s_d}
+#        ${SRC_s_d}
+        ${SRC_s_b}
         )
