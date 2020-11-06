@@ -12,7 +12,7 @@
 
 using namespace std;
 namespace concat_word {
-class Solution {
+class Solution1 {
     unordered_map<string, int> dict_;
     vector<set<int>> edges_;
     int numId_{0};
@@ -123,6 +123,190 @@ public:
         AddEdge(endWord);
 
         return BiBFS(dict_[beginWord], dict_[endWord]);
+    }
+};
+
+class Solution2 {
+public:
+    int ladderLength_BFS(string beginWord, string endWord, vector<string> &wordList) {
+        unordered_set<string> wordSet(wordList.begin(), wordList.end());
+        if (wordSet.count(endWord) == 0) {
+            return 0;
+        }
+        if (beginWord == endWord) {
+            return 1;
+        }
+        queue<string> q;
+        q.push(beginWord);
+        int step = 0;
+        while (!q.empty()) {
+            step++;
+            int tmpSize = q.size();
+            for (int k = 0; k < tmpSize; k++) {
+                string tmp = q.front();
+                q.pop();
+                for (auto &c : tmp) {
+                    char tc = c;
+                    for (char i = 'a'; i <= 'z'; i++) {
+                        c = i;
+                        if (tmp == endWord) {
+                            return step + 1;
+                        }
+                        if (wordSet.count(tmp) == 0) {
+                            continue;
+                        }
+                        wordSet.erase(tmp);
+                        q.push(tmp);
+                    }
+                    c = tc;
+                }
+            }
+        }
+        return 0;
+    }
+
+    int ladderLength(string beginWord, string endWord, vector<string> &wordList) {
+        unordered_set<string> wordSet(wordList.begin(), wordList.end());
+        if (wordSet.count(endWord) == 0) {
+            return 0;
+        }
+        if (beginWord == endWord) {
+            return 1;
+        }
+        unordered_set<string> bq;
+        bq.insert(beginWord);
+
+        unordered_set<string> eq;
+        eq.insert(endWord);
+        int step = 0;
+
+        while (!bq.empty() && !eq.empty()) {
+            step++;
+            unordered_set<string> tmp;
+            if (bq.size() > eq.size()) {
+                swap(bq, eq);
+            }
+            for (auto bw : bq) {
+                for (char &c : bw) {
+                    char tc = c;
+                    for (char i = 'a'; i <= 'z'; i++) {
+                        c = i;
+                        if (eq.count(bw) > 0) {
+                            return step + 1;
+                        }
+                        if (wordSet.count(bw) == 0) {
+                            continue;
+                        }
+                        wordSet.erase(bw);
+                        tmp.insert(bw);
+                    }
+                    c = tc;
+                }
+            }
+            swap(tmp, bq);
+        }
+        return 0;
+    }
+};
+
+class Solution {
+    unordered_map<string, int> wordMap_;
+    vector<unordered_map<int, bool>> edges_;
+    int wordId_{0};
+public:
+    int PutWord(string &word) {
+        if (wordMap_.count(word) == 0) {
+            wordMap_[word] = wordId_;
+            edges_.emplace_back();
+            return wordId_++;
+        }
+        return wordMap_[word];
+    }
+
+    void ExpandWord(string &word) {
+        int id1 = PutWord(word);
+        for (auto &c:word) {
+            char tmp = c;
+            c = '*';
+            int id2 = PutWord(word);
+            edges_[id1][id2] = false;
+            edges_[id2][id1] = false;
+            c = tmp;
+        }
+    }
+
+    int ladderLength_BFS(string beginWord, string endWord, vector<string> &wordList) {
+        for (auto &word : wordList) {
+            ExpandWord(word);
+        }
+        if (wordMap_.count(endWord) == 0) {
+            return 0;
+        }
+        ExpandWord(beginWord);
+        int bid = wordMap_[beginWord];
+        int eid = wordMap_[endWord];
+        queue<int> q;
+        q.push(bid);
+        int step = 0;
+        while (!q.empty()) {
+            ++step;
+            int tmpSize = q.size();
+            for (int i = 0; i < tmpSize; i++) {
+                int tmpId = q.front();
+                q.pop();
+                for (auto &id : edges_[tmpId]) {
+                    if (id.second) {
+                        continue;
+                    }
+                    id.second = true;
+                    if (id.first == eid) {
+                        return step / 2 + 1;
+                    }
+                    q.push(id.first);
+                }
+            }
+        }
+        return 0;
+    }
+
+    int ladderLength(string beginWord, string endWord, vector<string> &wordList) {
+        for (auto &word : wordList) {
+            ExpandWord(word);
+        }
+        if (wordMap_.count(endWord) == 0) {
+            return 0;
+        }
+        ExpandWord(beginWord);
+        int bid = wordMap_[beginWord];
+        int eid = wordMap_[endWord];
+        unordered_set<int> bq;
+        bq.insert(bid);
+
+        unordered_set<int> eq;
+        eq.insert(eid);
+
+        int step = 0;
+        while (!bq.empty() && !eq.empty()) {
+            ++step;
+            if (bq.size() > eq.size()) {
+                swap(bq, eq);
+            }
+            unordered_set<int> tmp;
+            for (auto tmpId : bq) {
+                for (auto &id : edges_[tmpId]) {
+                    if (id.second) {
+                        continue;
+                    }
+                    id.second = true;
+                    if (eq.count(id.first) > 0) {
+                        return step / 2 + 1;
+                    }
+                    tmp.insert(id.first);
+                }
+            }
+            swap(bq, tmp);
+        }
+        return 0;
     }
 };
 }
