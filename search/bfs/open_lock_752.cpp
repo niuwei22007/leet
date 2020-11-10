@@ -31,6 +31,22 @@ class Solution {
         }
     }
 
+    static inline void Change(string& tmp, int index, bool add) {
+        if (add) {
+            if (tmp[index] == '9') {
+                tmp[index] = '0';
+            } else {
+                tmp[index]++;
+            }
+        } else {
+            if (tmp[index] == '0') {
+                tmp[index] = '9';
+            } else {
+                tmp[index]--;
+            }
+        }
+    }
+
     void BFS(unordered_set<string>& deadSet,
              unordered_set<string>& allSet,
              unordered_set<string>& nextSet,
@@ -89,24 +105,17 @@ class Solution {
         for (const string& next: leftSet) {
             string tmp = next;
             for (int i = 0; i < LEN; i++) {
-                char old = tmp[i];
-                Add(tmp, i);
-                if (rightSet.count(tmp) > 0) {
-                    return;
+                for (int j = 0; j < 2; j++) {
+                    char old = tmp[i];
+                    Change(tmp, i, j);
+                    if (rightSet.count(tmp) > 0) {
+                        return;
+                    }
+                    if (deadSet.count(tmp) == 0 && allSet.count(tmp) == 0) {
+                        tmpSet.insert(tmp);
+                    }
+                    tmp[i] = old;
                 }
-                if (deadSet.count(tmp) == 0 && allSet.count(tmp) == 0) {
-                    tmpSet.insert(tmp);
-                }
-                tmp[i] = old;
-
-                Sub(tmp, i);
-                if (rightSet.count(tmp) > 0) {
-                    return;
-                }
-                if (deadSet.count(tmp) == 0 && allSet.count(tmp) == 0) {
-                    tmpSet.insert(tmp);
-                }
-                tmp[i] = old;
             }
         }
         BiBFS(deadSet, allSet, tmpSet, rightSet, depth);
