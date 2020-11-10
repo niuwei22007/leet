@@ -1,7 +1,8 @@
 #include "trust.h"
 
 int main() {
-    TestForConcatWords2();
+    // TestForConcatWords2();
+    TestForOpenLock();
 
     // TestForConcatWords();
     //    TestForTrie();

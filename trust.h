@@ -5,7 +5,8 @@
 #ifndef TRUSTDO_TRUST_H
 #define TRUSTDO_TRUST_H
 
-void TestForConcatWords2();
+// void TestForConcatWords2();
+void TestForOpenLock();
 
 
 // void TestForConcatWords();
