@@ -5,8 +5,10 @@
 #ifndef TRUSTDO_TRUST_H
 #define TRUSTDO_TRUST_H
 
+void TestForConcatWords2();
 
-void TestForConcatWords();
+
+// void TestForConcatWords();
 //void TestForTrie();
 //void TestForWordReplace();
 //void TestForMagicDict();
