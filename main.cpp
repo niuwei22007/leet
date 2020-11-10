@@ -2,7 +2,8 @@
 
 int main() {
     // TestForConcatWords2();
-    TestForOpenLock();
+    // TestForOpenLock();
+    TestForZeroOne();
 
     // TestForConcatWords();
     //    TestForTrie();
