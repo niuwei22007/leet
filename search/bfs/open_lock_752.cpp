@@ -51,7 +51,7 @@ class Solution {
                 if (tmpNext == target) {
                     return;
                 }
-                if (deadSet.count(tmpNext) == 0) {
+                if (deadSet.count(tmpNext) == 0 && allSet.count(tmpNext) == 0) {
                     tmpSet.insert(tmpNext);
                 }
                 tmpNext[i] = old;
@@ -60,7 +60,7 @@ class Solution {
                 if (tmpNext == target) {
                     return;
                 }
-                if (deadSet.count(tmpNext) == 0) {
+                if (deadSet.count(tmpNext) == 0 && allSet.count(tmpNext) == 0) {
                     tmpSet.insert(tmpNext);
                 }
                 tmpNext[i] = old;
@@ -70,8 +70,50 @@ class Solution {
         BFS(deadSet, allSet, tmpSet, depth, target);
     }
 
+    void BiBFS(unordered_set<string>& deadSet,
+               unordered_set<string>& allSet,
+               unordered_set<string>& leftSet,
+               unordered_set<string>& rightSet,
+               int& depth) {
+        if (leftSet.empty()) {
+            depth = -1;
+            return;
+        }
+        if (leftSet.size() > rightSet.size()) {
+            swap(leftSet, rightSet);
+        }
+
+        depth++;
+        unordered_set<string> tmpSet;
+        allSet.insert(leftSet.begin(), leftSet.end());
+        for (const string& next: leftSet) {
+            string tmp = next;
+            for (int i = 0; i < LEN; i++) {
+                char old = tmp[i];
+                Add(tmp, i);
+                if (rightSet.count(tmp) > 0) {
+                    return;
+                }
+                if (deadSet.count(tmp) == 0 && allSet.count(tmp) == 0) {
+                    tmpSet.insert(tmp);
+                }
+                tmp[i] = old;
+
+                Sub(tmp, i);
+                if (rightSet.count(tmp) > 0) {
+                    return;
+                }
+                if (deadSet.count(tmp) == 0 && allSet.count(tmp) == 0) {
+                    tmpSet.insert(tmp);
+                }
+                tmp[i] = old;
+            }
+        }
+        BiBFS(deadSet, allSet, tmpSet, rightSet, depth);
+    }
+
 public:
-    int openLock(vector<string>& deadends, string target) {
+    int openLock_BFS(vector<string>& deadends, string target) {
         string start = "0000";
         if (start == target) {
             return 0;
@@ -102,6 +144,42 @@ public:
 
         int depth = 0;
         BFS(deadSet, allSet, nextSet, depth, target);
+        return depth;
+    }
+
+    int openLock(vector<string>& deadends, string target) {
+        string start = "0000";
+        if (start == target) {
+            return 0;
+        }
+        unordered_set<string> deadSet(deadends.begin(), deadends.end());
+        if (deadSet.count(start) > 0) {
+            return -1;
+        }
+
+        int findCount = 0;
+        for (int i = 0; i < LEN; i++) {
+            char old = target[i];
+            Add(target, i);
+            findCount += deadSet.count(target);
+            target[i] = old;
+
+            Sub(target, i);
+            findCount += deadSet.count(target);
+            target[i] = old;
+        }
+        if (findCount == LEN * 2) {
+            return -1;
+        }
+
+        unordered_set<string> allSet;
+        unordered_set<string> leftSet;
+        unordered_set<string> rightSet;
+        leftSet.insert(start);
+        rightSet.insert(target);
+
+        int depth = 0;
+        BiBFS(deadSet, allSet, leftSet, rightSet, depth);
         return depth;
     }
 };
