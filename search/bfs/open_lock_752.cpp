@@ -47,6 +47,26 @@ class Solution {
         }
     }
 
+    void DFS(unordered_map<string, vector<string>>& path,
+             vector<vector<string>>& res,
+             vector<string>& tmp,
+             string& next,
+             string& target) {
+        if (next == target) {
+            res.push_back(tmp);
+            return;
+        }
+        if (path.count(next) == 0 || path[next].empty()) {
+            return;
+        }
+
+        for (string& n : path[next]) {
+            tmp.push_back(n);
+            DFS(path, res, tmp, n, target);
+            tmp.pop_back();
+        }
+    }
+
     void BFS(unordered_set<string>& deadSet,
              unordered_set<string>& allSet,
              unordered_set<string>& nextSet,
@@ -90,18 +110,22 @@ class Solution {
                unordered_set<string>& allSet,
                unordered_set<string>& leftSet,
                unordered_set<string>& rightSet,
-               int& depth) {
+               unordered_map<string, vector<string>>& path,
+               int& depth,
+               bool reverse) {
         if (leftSet.empty()) {
             depth = -1;
             return;
         }
         if (leftSet.size() > rightSet.size()) {
             swap(leftSet, rightSet);
+            reverse = !reverse;
         }
 
         depth++;
         unordered_set<string> tmpSet;
         allSet.insert(leftSet.begin(), leftSet.end());
+        bool isFind = false;
         for (const string& next: leftSet) {
             string tmp = next;
             for (int i = 0; i < LEN; i++) {
@@ -109,16 +133,33 @@ class Solution {
                     char old = tmp[i];
                     Change(tmp, i, j);
                     if (rightSet.count(tmp) > 0) {
-                        return;
+                        isFind = true;
                     }
                     if (deadSet.count(tmp) == 0 && allSet.count(tmp) == 0) {
                         tmpSet.insert(tmp);
+                        string key = reverse ? tmp : next;
+                        string val = reverse ? next : tmp;
+                        if (path.count(key) == 0) {
+                            path[key] = vector<string>();
+                        }
+                        path[key].push_back(val);
                     }
                     tmp[i] = old;
                 }
             }
         }
-        BiBFS(deadSet, allSet, tmpSet, rightSet, depth);
+        if (!isFind) {
+            BiBFS(deadSet, allSet, tmpSet, rightSet, path, depth, reverse);
+        }
+    }
+
+    void ShowPath(vector<vector<string>>& res) {
+        for (const vector<string>& p : res) {
+            for (const string& n : p) {
+                printf("%s --> ", n.c_str());
+            }
+            printf("\n");
+        }
     }
 
 public:
@@ -184,11 +225,18 @@ public:
         unordered_set<string> allSet;
         unordered_set<string> leftSet;
         unordered_set<string> rightSet;
+        unordered_map<string, vector<string>> path;
         leftSet.insert(start);
         rightSet.insert(target);
 
         int depth = 0;
-        BiBFS(deadSet, allSet, leftSet, rightSet, depth);
+        BiBFS(deadSet, allSet, leftSet, rightSet, path, depth, false);
+
+        vector<vector<string>> res;
+        vector<string> tmp;
+        tmp.push_back(start);
+        DFS(path, res, tmp, start, target);
+        ShowPath(res);
         return depth;
     }
 };
@@ -196,8 +244,8 @@ public:
 
 void TestForOpenLock() {
     auto* obj = new open_lock::Solution();
-    string target = "8888";
-    vector<string> deadends{"8887", "8889", "8878", "8898", "8788", "8988", "7888", "9888"};
+    string target = "0202";
+    vector<string> deadends{"0201", "0101", "0102", "1212", "2002"};
     auto res = obj->openLock(deadends, target);
     printf("%d\n", res);
 }
