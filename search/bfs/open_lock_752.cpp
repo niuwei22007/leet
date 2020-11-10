@@ -106,13 +106,13 @@ class Solution {
         BFS(deadSet, allSet, tmpSet, depth, target);
     }
 
-    void BiBFS(unordered_set<string>& deadSet,
-               unordered_set<string>& allSet,
-               unordered_set<string>& leftSet,
-               unordered_set<string>& rightSet,
-               unordered_map<string, vector<string>>& path,
-               int& depth,
-               bool reverse) {
+    void BiBFS_show_path(unordered_set<string>& deadSet,
+                         unordered_set<string>& allSet,
+                         unordered_set<string>& leftSet,
+                         unordered_set<string>& rightSet,
+                         unordered_map<string, vector<string>>& path,
+                         int& depth,
+                         bool reverse) {
         if (leftSet.empty()) {
             depth = -1;
             return;
@@ -149,8 +149,43 @@ class Solution {
             }
         }
         if (!isFind) {
-            BiBFS(deadSet, allSet, tmpSet, rightSet, path, depth, reverse);
+            BiBFS_show_path(deadSet, allSet, tmpSet, rightSet, path, depth, reverse);
         }
+    }
+
+    void BiBFS(unordered_set<string>& deadSet,
+               unordered_set<string>& allSet,
+               unordered_set<string>& leftSet,
+               unordered_set<string>& rightSet,
+               int& depth) {
+        if (leftSet.empty()) {
+            depth = -1;
+            return;
+        }
+        if (leftSet.size() > rightSet.size()) {
+            swap(leftSet, rightSet);
+        }
+
+        depth++;
+        unordered_set<string> tmpSet;
+        allSet.insert(leftSet.begin(), leftSet.end());
+        for (const string& next: leftSet) {
+            string tmp = next;
+            for (int i = 0; i < LEN; i++) {
+                for (int j = 0; j < 2; j++) {
+                    char old = tmp[i];
+                    Change(tmp, i, j);
+                    if (rightSet.count(tmp) > 0) {
+                        return;
+                    }
+                    if (deadSet.count(tmp) == 0 && allSet.count(tmp) == 0) {
+                        tmpSet.insert(tmp);
+                    }
+                    tmp[i] = old;
+                }
+            }
+        }
+        BiBFS(deadSet, allSet, tmpSet, rightSet, depth);
     }
 
     void ShowPath(vector<vector<string>>& res) {
@@ -197,7 +232,7 @@ public:
         return depth;
     }
 
-    int openLock(vector<string>& deadends, string target) {
+    int openLock_show_path(vector<string>& deadends, string target) {
         string start = "0000";
         if (start == target) {
             return 0;
@@ -230,13 +265,49 @@ public:
         rightSet.insert(target);
 
         int depth = 0;
-        BiBFS(deadSet, allSet, leftSet, rightSet, path, depth, false);
+        BiBFS_show_path(deadSet, allSet, leftSet, rightSet, path, depth, false);
 
         vector<vector<string>> res;
         vector<string> tmp;
         tmp.push_back(start);
         DFS(path, res, tmp, start, target);
         ShowPath(res);
+        return depth;
+    }
+
+    int openLock(vector<string>& deadends, string target) {
+        string start = "0000";
+        if (start == target) {
+            return 0;
+        }
+        unordered_set<string> deadSet(deadends.begin(), deadends.end());
+        if (deadSet.count(start) > 0) {
+            return -1;
+        }
+
+        int findCount = 0;
+        for (int i = 0; i < LEN; i++) {
+            char old = target[i];
+            Add(target, i);
+            findCount += deadSet.count(target);
+            target[i] = old;
+
+            Sub(target, i);
+            findCount += deadSet.count(target);
+            target[i] = old;
+        }
+        if (findCount == LEN * 2) {
+            return -1;
+        }
+
+        unordered_set<string> allSet;
+        unordered_set<string> leftSet;
+        unordered_set<string> rightSet;
+        leftSet.insert(start);
+        rightSet.insert(target);
+
+        int depth = 0;
+        BiBFS(deadSet, allSet, leftSet, rightSet, depth);
         return depth;
     }
 };
