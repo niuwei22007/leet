@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.17)
 project(TrustDo)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 
 include_directories(
         trust.h
@@ -14,6 +14,6 @@ file(GLOB SRC_s_b search/bfs/*.cpp)
 
 add_executable(LeetCode
         ${SRC0}
-#        ${SRC_s_d}
+        #        ${SRC_s_d}
         ${SRC_s_b}
         )

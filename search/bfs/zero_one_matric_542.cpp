@@ -19,39 +19,42 @@ class Solution {
                                        {0,  1}};
 public:
     vector<vector<int>> updateMatrix(vector<vector<int>>& matrix) {
-        vector<vector<int>> ans;
-        if (matrix.empty()) {
-            return ans;
-        }
         int m = matrix.size();
+        if (m == 0) {
+            return vector<vector<int>>();
+        }
         int n = matrix[0].size();
-        ans = vector<vector<int>>(m, vector<int>(n));
-        vector<vector<int>> used(m, vector<int>(n));
+        vector<vector<int>> dist(m, vector<int>(n, 0));
+        vector<vector<bool>> used(m, vector<bool>(n, false));
+
         queue<pair<int, int>> q;
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (matrix[i][j] == 0) {
                     q.emplace(i, j);
-                    used[i][j] = 1;
+                    used[i][j] = true;
                 }
             }
         }
+
         while (!q.empty()) {
-            pair<int, int>& loc = q.front();
+            auto[i, j] = q.front();
             q.pop();
-            int i = loc.first, j = loc.second;
+
             for (int d = 0; d < 4; d++) {
-                int newI = i + dirs[d][0];
-                int newJ = j + dirs[d][1];
-                if ((newI < 0 || newI >= m || newJ < 0 || newJ >= n || used[newI][newJ] == 1)) {
+                int ni = i + dirs[d][0];
+                int nj = j + dirs[d][1];
+
+                if (ni < 0 || ni >= m || nj < 0 || nj >= n || used[ni][nj]) {
                     continue;
                 }
-                ans[newI][newJ] = ans[i][j] + 1;
-                q.emplace(newI, newJ);
-                used[i][j] = 1;
+
+                dist[ni][nj] = dist[i][j] + 1;
+                used[ni][nj] = true;
+                q.emplace(ni, nj);
             }
         }
-        return ans;
+        return dist;
     }
 };
 }
