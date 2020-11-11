@@ -18,7 +18,7 @@ class Solution {
                                        {0,  -1},
                                        {0,  1}};
 public:
-    vector<vector<int>> updateMatrix(vector<vector<int>>& matrix) {
+    vector<vector<int>> updateMatrix_BFS(vector<vector<int>>& matrix) {
         int m = matrix.size();
         if (m == 0) {
             return vector<vector<int>>();
@@ -54,6 +54,43 @@ public:
                 q.emplace(ni, nj);
             }
         }
+        return dist;
+    }
+
+    vector<vector<int>> updateMatrix(vector<vector<int>>& matrix) {
+        int m = matrix.size();
+        int n = matrix[0].size();
+        vector<vector<int>> dist(m, vector<int>(n, INT_MAX / 2));
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] == 0) {
+                    dist[i][j] = 0;
+                }
+            }
+        }
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if ((i + 1) < m) {
+                    dist[i + 1][j] = min(dist[i + 1][j], dist[i][j] + 1);
+                }
+                if ((j + 1) < n) {
+                    dist[i][j + 1] = min(dist[i][j + 1], dist[i][j] + 1);
+                }
+            }
+        }
+
+        for (int i = m - 1; i >= 0; i--) {
+            for (int j = n - 1; j >= 0; j--) {
+                if ((i - 1) >= 0) {
+                    dist[i - 1][j] = min(dist[i - 1][j], dist[i][j] + 1);
+                }
+                if ((j - 1) >= 0) {
+                    dist[i][j - 1] = min(dist[i][j - 1], dist[i][j] + 1);
+                }
+            }
+        }
+
         return dist;
     }
 };
