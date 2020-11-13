@@ -7,7 +7,8 @@
 
 // void TestForConcatWords2();
 // void TestForOpenLock();
-void TestForZeroOne();
+// void TestForZeroOne();
+void TestForCutOffTrees();
 
 
 // void TestForConcatWords();

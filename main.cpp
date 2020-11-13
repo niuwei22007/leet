@@ -3,7 +3,11 @@
 int main() {
     // TestForConcatWords2();
     // TestForOpenLock();
-    TestForZeroOne();
+    // TestForZeroOne();
+    TestForCutOffTrees();
+
+
+
 
     // TestForConcatWords();
     //    TestForTrie();
