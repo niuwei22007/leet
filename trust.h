@@ -10,7 +10,8 @@
 // void TestForZeroOne();
 // void TestForCutOffTrees();
 // void TestForNumOfIslands();
-void TestForShortestBridge();
+// void TestForShortestBridge();
+void TestForPartitionSubsets();
 
 
 // void TestForConcatWords();

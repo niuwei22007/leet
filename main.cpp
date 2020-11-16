@@ -6,7 +6,8 @@ int main() {
     // TestForZeroOne();
     // TestForCutOffTrees();
     // TestForNumOfIslands();
-    TestForShortestBridge();
+    // TestForShortestBridge();
+    TestForPartitionSubsets();
 
 
 
