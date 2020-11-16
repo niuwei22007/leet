@@ -5,7 +5,8 @@ int main() {
     // TestForOpenLock();
     // TestForZeroOne();
     // TestForCutOffTrees();
-    TestForNumOfIslands();
+    // TestForNumOfIslands();
+    TestForShortestBridge();
 
 
 

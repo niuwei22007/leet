@@ -9,7 +9,8 @@
 // void TestForOpenLock();
 // void TestForZeroOne();
 // void TestForCutOffTrees();
-void TestForNumOfIslands();
+// void TestForNumOfIslands();
+void TestForShortestBridge();
 
 
 // void TestForConcatWords();
