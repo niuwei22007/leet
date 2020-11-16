@@ -4,7 +4,8 @@ int main() {
     // TestForConcatWords2();
     // TestForOpenLock();
     // TestForZeroOne();
-    TestForCutOffTrees();
+    // TestForCutOffTrees();
+    TestForNumOfIslands();
 
 
 

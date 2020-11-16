@@ -8,7 +8,8 @@
 // void TestForConcatWords2();
 // void TestForOpenLock();
 // void TestForZeroOne();
-void TestForCutOffTrees();
+// void TestForCutOffTrees();
+void TestForNumOfIslands();
 
 
 // void TestForConcatWords();
