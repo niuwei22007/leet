@@ -11,7 +11,8 @@
 // void TestForCutOffTrees();
 // void TestForNumOfIslands();
 // void TestForShortestBridge();
-void TestForPartitionSubsets();
+// void TestForPartitionSubsets();
+void TestForRestoreIp();
 
 
 // void TestForConcatWords();
