@@ -13,7 +13,7 @@
 using namespace std;
 namespace restore_ip {
 class Solution {
-    unordered_set<string> validSet_;
+    // unordered_set<string> validSet_;
     vector<string> ans_;
 
     static string Join(vector<string>& ips) {
@@ -26,14 +26,20 @@ class Solution {
         return move(res);
     }
 
-    void InitSet() {
-        for (int i = 0; i <= 255; i++) {
-            validSet_.insert(to_string(i));
-        }
-    }
+    // void InitSet() {
+    //     for (int i = 0; i <= 255; i++) {
+    //         validSet_.insert(to_string(i));
+    //     }
+    // }
 
-    inline bool Valid(const string& s) {
-        return validSet_.count(s) > 0;
+    static inline bool Valid(const string& s) {
+        if (s[0] == '0' && s.size() > 1) {
+            return false;
+        }
+        if (s.size() == 3 && s > "255") {
+            return false;
+        }
+        return true;
     }
 
     void Partition(const string& s, int startIndex, vector<string>& tmp) {
@@ -57,9 +63,6 @@ class Solution {
             tmp.push_back(subStr);
             Partition(s, index, tmp);
             tmp.pop_back();
-            if (s[startIndex] == '0') {
-                break;
-            }
             len++;
             index = startIndex + len;
         }
@@ -70,7 +73,7 @@ public:
         if (s.length() < 4) {
             return ans_;
         }
-        InitSet();
+        // InitSet();
         vector<string> tmp;
         Partition(s, 0, tmp);
         return ans_;
