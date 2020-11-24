@@ -13,7 +13,8 @@
 // void TestForShortestBridge();
 // void TestForPartitionSubsets();
 // void TestForRestoreIp();
-void TestForPalindorme();
+// void TestForPalindorme();
+void TestForLongestPalindrome();
 
 
 // void TestForConcatWords();

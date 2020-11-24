@@ -9,7 +9,8 @@ int main() {
     // TestForShortestBridge();
     // TestForPartitionSubsets();
     // TestForRestoreIp();
-    TestForPalindorme();
+    // TestForPalindorme();
+    TestForLongestPalindrome();
 
 
 
