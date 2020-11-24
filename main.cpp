@@ -8,8 +8,8 @@ int main() {
     // TestForNumOfIslands();
     // TestForShortestBridge();
     // TestForPartitionSubsets();
-    TestForRestoreIp();
-
+    // TestForRestoreIp();
+    TestForPalindorme();
 
 
 

@@ -12,7 +12,8 @@
 // void TestForNumOfIslands();
 // void TestForShortestBridge();
 // void TestForPartitionSubsets();
-void TestForRestoreIp();
+// void TestForRestoreIp();
+void TestForPalindorme();
 
 
 // void TestForConcatWords();
