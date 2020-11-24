@@ -13,20 +13,14 @@
 using namespace std;
 namespace palindorme {
 class Solution {
-    unordered_map<string, bool> dict_;
 public:
-    bool Check(const string& s) {
-        if (dict_.find(s) != dict_.end()) {
-            return dict_[s];
-        }
-        for (int i = 0; i < s.size() / 2; i++) {
-            if (s[i] != s[s.size() - 1 - i]) {
-                dict_[s] = false;
-                return false;
-            }
-        }
-        dict_[s] = true;
-        return true;
+    bool Check(const string& s, int i, int j) {
+        if (j < i)
+            return true;
+        if (s[i++] == s[j--])
+            return Check(s, i, j);
+        else
+            return false;
     }
 
     void Partition(const string& s, int startIndex, vector<vector<string>>& ans, vector<string>& tmp) {
@@ -34,11 +28,11 @@ public:
             ans.push_back(tmp);
             return;
         }
-        for (int i = 1; i <= (s.size() - startIndex); i++) {
-            string sub = s.substr(startIndex, i);
-            if (Check(sub)) {
+        for (int i = startIndex; i < s.size(); i++) {
+            string sub = s.substr(startIndex, i - startIndex + 1);
+            if (Check(s, startIndex, i)) {
                 tmp.push_back(sub);
-                Partition(s, startIndex + i, ans, tmp);
+                Partition(s, i + 1, ans, tmp);
                 tmp.pop_back();
             }
         }
