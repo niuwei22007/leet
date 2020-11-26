@@ -10,7 +10,8 @@ int main() {
     // TestForPartitionSubsets();
     // TestForRestoreIp();
     // TestForPalindorme();
-    TestForLongestPalindrome();
+    // TestForLongestPalindrome();
+    TestForAddParentheses();
 
 
 

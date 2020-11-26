@@ -14,7 +14,8 @@
 // void TestForPartitionSubsets();
 // void TestForRestoreIp();
 // void TestForPalindorme();
-void TestForLongestPalindrome();
+// void TestForLongestPalindrome();
+void TestForAddParentheses();
 
 
 // void TestForConcatWords();
