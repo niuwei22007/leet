@@ -11,7 +11,8 @@ int main() {
     // TestForRestoreIp();
     // TestForPalindorme();
     // TestForLongestPalindrome();
-    TestForAddParentheses();
+    // TestForAddParentheses();
+    TestForAddOperators();
 
 
 

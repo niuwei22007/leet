@@ -15,7 +15,8 @@
 // void TestForRestoreIp();
 // void TestForPalindorme();
 // void TestForLongestPalindrome();
-void TestForAddParentheses();
+// void TestForAddParentheses();
+void TestForAddOperators();
 
 
 // void TestForConcatWords();
