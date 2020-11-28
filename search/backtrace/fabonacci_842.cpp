@@ -14,7 +14,7 @@ using namespace std;
 namespace fabonacci {
 class Solution {
 public:
-    long LastSum(vector<int>& ans) {
+    static inline long LastSum(vector<int>& ans) {
         if (ans.size() >= 2) {
             size_t len = ans.size();
             return (long)ans[len - 1] + ans[len - 2];
