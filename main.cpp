@@ -12,7 +12,8 @@ int main() {
     // TestForPalindorme();
     // TestForLongestPalindrome();
     // TestForAddParentheses();
-    TestForAddOperators();
+    // TestForAddOperators();
+    TestForSplitFabonacci();
 
 
 
