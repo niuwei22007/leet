@@ -12,10 +12,12 @@ file(GLOB SRC0 *.cpp)
 file(GLOB SRC_s_d search/dfs/*.cpp)
 file(GLOB SRC_s_b search/bfs/*.cpp)
 file(GLOB SRC_s_bt search/backtrace/*.cpp)
+file(GLOB SRC_dp dp/*.cpp)
 
 add_executable(LeetCode
         ${SRC0}
         #        ${SRC_s_d}
 #        ${SRC_s_b}
-        ${SRC_s_bt}
+#        ${SRC_s_bt}
+        ${SRC_dp}
         )

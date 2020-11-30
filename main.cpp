@@ -13,8 +13,8 @@ int main() {
     // TestForLongestPalindrome();
     // TestForAddParentheses();
     // TestForAddOperators();
-    TestForSplitFabonacci();
-
+    // TestForSplitFabonacci();
+    TestForClimbStaires();
 
 
     // TestForConcatWords();

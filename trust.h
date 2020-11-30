@@ -17,7 +17,8 @@
 // void TestForLongestPalindrome();
 // void TestForAddParentheses();
 // void TestForAddOperators();
-void TestForSplitFabonacci();
+// void TestForSplitFabonacci();
+void TestForClimbStaires();
 
 
 // void TestForConcatWords();
