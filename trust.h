@@ -18,7 +18,8 @@
 // void TestForAddParentheses();
 // void TestForAddOperators();
 // void TestForSplitFabonacci();
-void TestForClimbStaires();
+// void TestForClimbStaires();
+void TestForClimbStaires2();
 
 
 // void TestForConcatWords();

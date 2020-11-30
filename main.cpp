@@ -14,8 +14,8 @@ int main() {
     // TestForAddParentheses();
     // TestForAddOperators();
     // TestForSplitFabonacci();
-    TestForClimbStaires();
-
+    // TestForClimbStaires();
+    TestForClimbStaires2();
 
     // TestForConcatWords();
     //    TestForTrie();
