@@ -15,7 +15,11 @@ int main() {
     // TestForAddOperators();
     // TestForSplitFabonacci();
     // TestForClimbStaires();
-    TestForClimbStaires2();
+    // TestForClimbStaires2();
+    TestForRangeSum();
+
+
+
 
     // TestForConcatWords();
     //    TestForTrie();

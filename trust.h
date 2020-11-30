@@ -19,7 +19,8 @@
 // void TestForAddOperators();
 // void TestForSplitFabonacci();
 // void TestForClimbStaires();
-void TestForClimbStaires2();
+// void TestForClimbStaires2();
+void TestForRangeSum();
 
 
 // void TestForConcatWords();
