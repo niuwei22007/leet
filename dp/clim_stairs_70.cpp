@@ -13,29 +13,27 @@
 using namespace std;
 namespace climb_stairs {
 class Solution {
+    int left = 1;
+    int right = 2;
+    int tmp = 0;
 public:
-    int count = 0;
-
-    void Backtracking(int cur, int target) {
-        if (cur >= target) {
-            if (cur == target) {
-                count++;
-            }
-            return;
-        }
-        Backtracking(cur + 1, target);
-        Backtracking(cur + 2, target);
-    }
 
     int climbStairs(int n) {
-        Backtracking(0, n);
-        return count;
+        if (n < 3) {
+            return n;
+        }
+        for (int i = 2; i < n; i++) {
+            tmp = left + right;
+            left = right;
+            right = tmp;
+        }
+        return right;
     }
 };
 }
 
 void TestForClimbStaires() {
     auto* obj = new climb_stairs::Solution();
-    auto res = obj->climbStairs(4);
+    auto res = obj->climbStairs(5);
     printf("%d\n", res);
 }
