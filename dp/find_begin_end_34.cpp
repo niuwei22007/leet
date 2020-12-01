@@ -18,17 +18,11 @@ public:
         if (nums.empty() || nums[0] > target || nums[nums.size() - 1] < target) {
             return {-1, -1};
         }
-        auto bit = lower_bound(nums.begin(), nums.end(), target);
-        if (bit == nums.end() || *bit != target) {
+        auto[b, e] = equal_range(nums.begin(), nums.end(), target);
+        if (b == e) {
             return {-1, -1};
         }
-        int begin = distance(nums.begin(), bit);
-        auto eit = upper_bound(bit, nums.end(), target);
-        if (eit == nums.end()) {
-            return {begin, (int)nums.size() - 1};
-        }
-        int end = distance(nums.begin(), eit) - 1;
-        return {begin, end};
+        return {(int)distance(nums.begin(), b), (int)distance(nums.begin(), e) - 1};
     }
 };
 }
