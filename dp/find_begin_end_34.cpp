@@ -22,12 +22,12 @@ public:
         if (bit == nums.end() || *bit != target) {
             return {-1, -1};
         }
-        int begin = bit - nums.begin();
+        int begin = distance(nums.begin(), bit);
         auto eit = upper_bound(bit, nums.end(), target);
         if (eit == nums.end()) {
             return {begin, (int)nums.size() - 1};
         }
-        int end = (eit - nums.begin()) - 1;
+        int end = distance(nums.begin(), eit) - 1;
         return {begin, end};
     }
 };
