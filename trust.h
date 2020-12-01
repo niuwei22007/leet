@@ -20,7 +20,8 @@
 // void TestForSplitFabonacci();
 // void TestForClimbStaires();
 // void TestForClimbStaires2();
-void TestForRangeSum();
+// void TestForRangeSum();
+void TestForMaxSubSeq();
 
 
 // void TestForConcatWords();

@@ -16,7 +16,8 @@ int main() {
     // TestForSplitFabonacci();
     // TestForClimbStaires();
     // TestForClimbStaires2();
-    TestForRangeSum();
+    // TestForRangeSum();
+    TestForMaxSubSeq();
 
 
 
