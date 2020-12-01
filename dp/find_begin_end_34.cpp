@@ -18,14 +18,16 @@ public:
         if (nums.empty() || nums[0] > target || nums[nums.size() - 1] < target) {
             return {-1, -1};
         }
-        vector<int> targetV{target};
-        auto it = find_first_of(nums.begin(), nums.end(), targetV.begin(), targetV.end());
-        if (it == nums.end()) {
+        auto bit = lower_bound(nums.begin(), nums.end(), target);
+        if (bit == nums.end() || *bit != target) {
             return {-1, -1};
         }
-        int begin = it - nums.begin();
-        it = find_end(nums.begin(), nums.end(), targetV.begin(), targetV.end());
-        int end = it - nums.begin();
+        int begin = bit - nums.begin();
+        auto eit = upper_bound(bit, nums.end(), target);
+        if (eit == nums.end()) {
+            return {begin, (int)nums.size() - 1};
+        }
+        int end = (eit - nums.begin()) - 1;
         return {begin, end};
     }
 };
@@ -34,6 +36,6 @@ public:
 void TestForFindBeginEnd() {
     vector<int> cost{5, 7, 7, 8, 8, 10};
     auto* obj = new find_begin_end::Solution();
-    auto res = obj->searchRange(cost, 6);
+    auto res = obj->searchRange(cost, 8);
     printf("%d, %d\n", res[0], res[1]);
 }
