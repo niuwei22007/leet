@@ -19,7 +19,8 @@ int main() {
     // TestForRangeSum();
     // TestForMaxSubSeq();
     // TestForFindBeginEnd();
-    TestForExchangeStock();
+    // TestForExchangeStock();
+    TestForHouseRobber();
 
 
 

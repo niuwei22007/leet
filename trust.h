@@ -23,7 +23,8 @@
 // void TestForRangeSum();
 // void TestForMaxSubSeq();
 // void TestForFindBeginEnd();
-void TestForExchangeStock();
+// void TestForExchangeStock();
+void TestForHouseRobber();
 
 
 
