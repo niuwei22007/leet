@@ -14,7 +14,7 @@ using namespace std;
 namespace max_sub_seq {
 class Solution {
 public:
-    int maxSubArray(vector<int>& nums) {
+    int maxSubArray_DP(vector<int>& nums) {
         if (nums.empty()) {
             return 0;
         }
@@ -25,6 +25,37 @@ public:
             maxVal = max(preMax, maxVal);
         }
         return maxVal;
+    }
+
+    struct Node {
+        int iSum, lSum, rSum, mSum;
+    };
+
+    Node Combine(Node& left, Node& right) {
+        Node n;
+        n.iSum = left.iSum + right.iSum;
+        n.lSum = max(left.lSum, left.iSum + right.lSum);
+        n.rSum = max(left.rSum + right.iSum, right.rSum);
+        n.mSum = max(max(left.mSum, right.mSum), left.rSum + right.lSum);
+        return n;
+    }
+
+    Node Get(vector<int>& nums, int l, int r) {
+        if (l == r) {
+            return {nums[l], nums[l], nums[l], nums[l]};
+        }
+        int mid = (l + r) >> 1;
+        Node left = Get(nums, l, mid);
+        Node right = Get(nums, mid + 1, r);
+        return Combine(left, right);
+    }
+
+    int maxSubArray(vector<int>& nums) {
+        if (nums.empty()) {
+            return 0;
+        }
+        Node n = Get(nums, 0, nums.size() - 1);
+        return n.mSum;
     }
 };
 }
