@@ -14,7 +14,7 @@ using namespace std;
 namespace stock_exchange {
 class Solution {
 public:
-    int maxProfit(vector<int>& prices) {
+    int maxProfit_Common(vector<int>& prices) {
         if (prices.empty()) {
             return 0;
         }
@@ -37,12 +37,28 @@ public:
         }
         return ans;
     }
+
+    int maxProfit(vector<int>& prices) {
+        if (prices.empty()) {
+            return 0;
+        }
+        int curMin = prices[0];
+        int maxPro = 0;
+        for (int i = 1; i < prices.size(); i++) {
+            if (prices[i] < curMin) {
+                curMin = prices[i];
+            } else {
+                maxPro = max(maxPro, prices[i] - curMin);
+            }
+        }
+        return maxPro;
+    }
 };
 }
 
 void TestForExchangeStock() {
     auto* obj = new stock_exchange::Solution();
-    vector<int> cost{7, 6, 4, 3, 1, 2};
+    vector<int> cost{7, 1, 5, 3, 0, 6, 4, 9};
     auto res = obj->maxProfit(cost);
     printf("%d\n", res);
 }
