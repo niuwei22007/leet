@@ -17,8 +17,9 @@ int main() {
     // TestForClimbStaires();
     // TestForClimbStaires2();
     // TestForRangeSum();
-    TestForMaxSubSeq();
+    // TestForMaxSubSeq();
     // TestForFindBeginEnd();
+    TestForExchangeStock();
 
 
 

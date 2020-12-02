@@ -35,12 +35,6 @@ public:
         return sums_[j] - sums_[i - 1];
     }
 };
-
-/**
- * Your NumArray object will be instantiated and called as such:
- * NumArray* obj = new NumArray(nums);
- * int param_1 = obj->sumRange(i,j);
- */
 }
 
 void TestForRangeSum() {

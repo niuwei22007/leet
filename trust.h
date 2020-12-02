@@ -21,8 +21,11 @@
 // void TestForClimbStaires();
 // void TestForClimbStaires2();
 // void TestForRangeSum();
-void TestForMaxSubSeq();
+// void TestForMaxSubSeq();
 // void TestForFindBeginEnd();
+void TestForExchangeStock();
+
+
 
 
 // void TestForConcatWords();
