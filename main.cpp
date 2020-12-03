@@ -1,6 +1,10 @@
 #include "trust.h"
 
 int main() {
+    TestForCountPrimes();
+
+
+
     // TestForConcatWords2();
     // TestForOpenLock();
     // TestForZeroOne();
@@ -20,7 +24,7 @@ int main() {
     // TestForMaxSubSeq();
     // TestForFindBeginEnd();
     // TestForExchangeStock();
-    TestForHouseRobber();
+    // TestForHouseRobber();
 
 
 

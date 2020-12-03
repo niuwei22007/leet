@@ -24,7 +24,8 @@
 // void TestForMaxSubSeq();
 // void TestForFindBeginEnd();
 // void TestForExchangeStock();
-void TestForHouseRobber();
+// void TestForHouseRobber();
+void TestForCountPrimes();
 
 
 
