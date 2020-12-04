@@ -58,7 +58,7 @@ public:
     }
 };
 
-class Solution {
+class Solution_DP {
 public:
     int maxProfit(vector<int>& prices) {
         if (prices.size() < 2) {
@@ -86,6 +86,39 @@ public:
         int max0 = max(dp[n - 1][0][0], dp[n - 1][0][1]);
         int max1 = max(dp[n - 1][1][0], dp[n - 1][1][1]);
         return max(max(max0, max1), dp[n - 1][2][0]);
+    }
+};
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        if (prices.size() < 2) {
+            return 0;
+        }
+        int n = prices.size();
+        int pre00 = 0, cur00 = 0;
+        int pre01 = -prices[0], cur01 = 0;
+        int pre10 = 0, cur10 = 0;
+        int pre11 = -prices[0], cur11 = 0;
+        int pre20 = 0, cur20 = 0;
+
+        for (int i = 1; i < n; i++) {
+            cur00 = pre00;
+            cur01 = max(pre01, pre00 - prices[i]);
+            cur10 = max(pre10, pre01 + prices[i]);
+            cur11 = max(pre11, pre10 - prices[i]);
+            cur20 = max(pre20, pre11 + prices[i]);
+
+            pre00 = cur00;
+            pre01 = cur01;
+            pre10 = cur10;
+            pre11 = cur11;
+            pre20 = cur20;
+        }
+
+        int max0 = max(cur00, cur01);
+        int max1 = max(cur10, cur11);
+        return max(max(max0, max1), cur20);
     }
 };
 }
