@@ -13,8 +13,27 @@
 using namespace std;
 namespace stock_exchange3 {
 class Solution {
+    struct tuple_hash {
+        size_t operator()(const tuple<int, int, int>& p) const {//别忘记const
+            return hash<int>()(get<0>(p)) ^ hash<int>()(get<1>(p)) ^ hash<int>()(get<2>(p));
+        }
+    };
+
+    struct tuple_equal {
+        bool operator()(const tuple<int, int, int>& a, const tuple<int, int, int>& b) const {
+            return get<0>(a) == get<0>(b) &&
+                   get<1>(a) == get<1>(b) &&
+                   get<2>(a) == get<2>(b);
+        }
+    };
+
+    unordered_map<tuple<int, int, int>, int, tuple_hash, tuple_equal> cache;
 public:
     int DFS(vector<int>& prices, int index, int status, int times) {
+        auto tp = make_tuple(index, status, times);
+        if (cache.find(tp) != cache.end()) {
+            return cache[tp];
+        }
         if (index == prices.size() || times == 2) {
             return 0;
         }
@@ -27,8 +46,10 @@ public:
         } else {
             buy = DFS(prices, index + 1, 1, times) - prices[index];
         }
-        return max(hold, max(sell, buy));
+        cache[tp] = max(hold, max(sell, buy));
+        return cache[tp];
     }
+
     int maxProfit(vector<int>& prices) {
         if (prices.size() < 2) {
             return 0;
