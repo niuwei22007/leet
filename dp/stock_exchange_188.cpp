@@ -26,7 +26,7 @@ public:
         }
         for (int i = 1; i < n; i++) {
             for (int j = 1; j < m; j++) {
-                int status = (i % 2) == 0 ? 1 : -1;
+                int status = (j % 2) == 0 ? 1 : -1;
                 dp[j] = max(dp[j], dp[j - 1] + prices[i] * status);
             }
         }
