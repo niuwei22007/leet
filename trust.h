@@ -28,7 +28,8 @@
 // void TestForCountPrimes();
 // void TestForHouseRobber2();
 // void TestForExchangeStock2();
-void TestForExchangeStock3();
+// void TestForExchangeStock3();
+void TestForExchangeStock4();
 
 
 
