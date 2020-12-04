@@ -12,7 +12,7 @@
 
 using namespace std;
 namespace stock_exchange3 {
-class Solution {
+class Solution_DFS {
     struct tuple_hash {
         size_t operator()(const tuple<int, int, int>& p) const {//别忘记const
             return hash<int>()(get<0>(p)) ^ hash<int>()(get<1>(p)) ^ hash<int>()(get<2>(p));
@@ -55,6 +55,37 @@ public:
             return 0;
         }
         return DFS(prices, 0, 0, 0);
+    }
+};
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        if (prices.size() < 2) {
+            return 0;
+        }
+        int n = prices.size();
+        int dp[n][3][2];
+        dp[0][0][0] = 0; // 0 sell
+        dp[0][0][1] = -prices[0]; // 1 buy
+
+        dp[0][1][0] = 0; // 1 sell
+        dp[0][1][1] = -prices[0]; // 2 buy
+
+        dp[0][2][0] = 0; // 2 sell
+        dp[0][2][1] = -prices[0]; // 3 buy
+
+        for (int i = 1; i < n; i++) {
+            dp[i][0][0] = dp[i - 1][0][0];
+            dp[i][0][1] = max(dp[i - 1][0][1], dp[i - 1][0][0] - prices[i]);
+            dp[i][1][0] = max(dp[i - 1][1][0], dp[i - 1][0][1] + prices[i]);
+            dp[i][1][1] = max(dp[i - 1][1][1], dp[i - 1][1][0] - prices[i]);
+            dp[i][2][0] = max(dp[i - 1][2][0], dp[i - 1][1][1] + prices[i]);
+        }
+
+        int max0 = max(dp[n - 1][0][0], dp[n - 1][0][1]);
+        int max1 = max(dp[n - 1][1][0], dp[n - 1][1][1]);
+        return max(max(max0, max1), dp[n - 1][2][0]);
     }
 };
 }
