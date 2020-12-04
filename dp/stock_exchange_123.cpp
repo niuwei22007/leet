@@ -1,4 +1,4 @@
-#include "../../trust.h"
+#include "../trust.h"
 #include <array>
 #include <string>
 #include <vector>
@@ -89,7 +89,7 @@ public:
     }
 };
 
-class Solution {
+class Solution_Compress {
 public:
     int maxProfit(vector<int>& prices) {
         if (prices.size() < 2) {
@@ -119,6 +119,33 @@ public:
         int max0 = max(cur00, cur01);
         int max1 = max(cur10, cur11);
         return max(max(max0, max1), cur20);
+    }
+};
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        if (prices.size() < 2) {
+            return 0;
+        }
+        int n = prices.size();
+        int pre00 = 0;
+        int pre01 = -prices[0];
+        int pre10 = 0;
+        int pre11 = -prices[0];
+        int pre20 = 0;
+
+        for (int i = 1; i < n; i++) {
+            // cur00 = pre00;
+            pre01 = max(pre01, pre00 - prices[i]);
+            pre10 = max(pre10, pre01 + prices[i]);
+            pre11 = max(pre11, pre10 - prices[i]);
+            pre20 = max(pre20, pre11 + prices[i]);
+        }
+
+        int max0 = max(pre00, pre01);
+        int max1 = max(pre10, pre11);
+        return max(max(max0, max1), pre20);
     }
 };
 }
