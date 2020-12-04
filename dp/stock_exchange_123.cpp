@@ -129,23 +129,23 @@ public:
             return 0;
         }
         int n = prices.size();
-        int pre00 = 0;
-        int pre01 = -prices[0];
-        int pre10 = 0;
-        int pre11 = -prices[0];
-        int pre20 = 0;
+        int dp0 = 0;
+        int dp1 = -prices[0];
+        int dp2 = 0;
+        int dp3 = -prices[0];
+        int dp4 = 0;
 
         for (int i = 1; i < n; i++) {
             // cur00 = pre00;
-            pre01 = max(pre01, pre00 - prices[i]);
-            pre10 = max(pre10, pre01 + prices[i]);
-            pre11 = max(pre11, pre10 - prices[i]);
-            pre20 = max(pre20, pre11 + prices[i]);
+            dp1 = max(dp1, dp0 - prices[i]);
+            dp2 = max(dp2, dp1 + prices[i]);
+            dp3 = max(dp3, dp2 - prices[i]);
+            dp4 = max(dp4, dp3 + prices[i]);
         }
 
-        int max0 = max(pre00, pre01);
-        int max1 = max(pre10, pre11);
-        return max(max(max0, max1), pre20);
+        int max0 = max(dp0, dp1);
+        int max1 = max(dp2, dp3);
+        return max(max(max0, max1), dp4);
     }
 };
 }
