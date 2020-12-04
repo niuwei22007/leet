@@ -1,7 +1,8 @@
 #include "trust.h"
 
 int main() {
-    TestForCountPrimes();
+    // TestForCountPrimes();
+    TestForHouseRobber2();
 
 
 

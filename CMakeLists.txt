@@ -20,5 +20,5 @@ add_executable(LeetCode
         #        ${SRC_s_d}
 #        ${SRC_s_b}
 #        ${SRC_s_bt}
-        ${SRC_other}
+        ${SRC_dp}
         )
