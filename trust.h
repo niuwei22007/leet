@@ -29,7 +29,8 @@
 // void TestForHouseRobber2();
 // void TestForExchangeStock2();
 // void TestForExchangeStock3();
-void TestForExchangeStock4();
+// void TestForExchangeStock4();
+void TestForExchangeStock5();
 
 
 

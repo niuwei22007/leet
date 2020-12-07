@@ -5,7 +5,8 @@ int main() {
     // TestForHouseRobber2();
     // TestForExchangeStock2();
     // TestForExchangeStock3();
-    TestForExchangeStock4();
+    // TestForExchangeStock4();
+    TestForExchangeStock5();
 
 
 
