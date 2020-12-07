@@ -14,7 +14,7 @@ using namespace std;
 namespace stock_exchange5 {
 class Solution {
 public:
-    int maxProfit(vector<int>& prices) {
+    int maxProfit_DP(vector<int>& prices) {
         if (prices.size() < 2) {
             return 0;
         }
@@ -30,12 +30,33 @@ public:
         }
         return dp[n - 1][0];
     }
+
+    int maxProfit(vector<int>& prices) {
+        if (prices.size() < 2) {
+            return 0;
+        }
+        int n = prices.size();
+        int preSell = max(0, prices[1] - prices[0]);
+        int preBuy = max(-prices[0], -prices[1]);
+        int curSell = 0;
+        int curBuy = 0;
+        int prePreSell = 0;
+
+        for (int i = 2; i < n; i++) {
+            curSell = max(preSell, preBuy + prices[i]);
+            curBuy = max(preBuy, prePreSell - prices[i]);
+            prePreSell = preSell;
+            preSell = curSell;
+            preBuy = curBuy;
+        }
+        return preSell;
+    }
 };
 }
 
 void TestForExchangeStock5() {
     auto* obj = new stock_exchange5::Solution();
-    vector<int> cost{1,2,3,0,2};
+    vector<int> cost{1, 2};
     auto res = obj->maxProfit(cost);
     printf("%d\n", res);
 }
