@@ -30,7 +30,8 @@
 // void TestForExchangeStock2();
 // void TestForExchangeStock3();
 // void TestForExchangeStock4();
-void TestForExchangeStock5();
+// void TestForExchangeStock5();
+void TestForDeleteAndEarn();
 
 
 

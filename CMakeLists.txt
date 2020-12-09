@@ -3,6 +3,8 @@ project(TrustDo)
 
 set(CMAKE_CXX_STANDARD 17)
 
+add_definitions(-Wall)
+
 include_directories(
         trust.h
         #        ${PROJECT_SOURCE_DIR}/../../opt/android-ndk-r20b/sysroot/usr/include
