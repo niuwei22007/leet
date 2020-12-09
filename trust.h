@@ -31,7 +31,8 @@
 // void TestForExchangeStock3();
 // void TestForExchangeStock4();
 // void TestForExchangeStock5();
-void TestForDeleteAndEarn();
+// void TestForDeleteAndEarn();
+void TestForMinSwap();
 
 
 

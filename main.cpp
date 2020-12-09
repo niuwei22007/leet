@@ -7,7 +7,8 @@ int main() {
     // TestForExchangeStock3();
     // TestForExchangeStock4();
     // TestForExchangeStock5();
-    TestForDeleteAndEarn();
+    // TestForDeleteAndEarn();
+    TestForMinSwap();
 
 
 
