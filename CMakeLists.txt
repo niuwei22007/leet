@@ -4,6 +4,7 @@ project(TrustDo)
 set(CMAKE_CXX_STANDARD 17)
 
 add_definitions(-Wall)
+add_definitions(-fno-stack-protector)
 
 include_directories(
         trust.h

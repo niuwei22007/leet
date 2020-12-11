@@ -26,6 +26,7 @@ class Solution {
     };
 
     TrieNode* root_;
+    vector<int> cache_;
 
     void Add(string& word) {
         TrieNode* tmp = root_;
@@ -43,10 +44,14 @@ class Solution {
         if (index == s.length()) {
             return true;
         }
+        if (cache_[index] > -1) {
+            return cache_[index];
+        }
         TrieNode* tmp = root_;
         for (int i = index; i < s.length(); i++) {
             int wi = s[i] - 'a';
             if (tmp->child_[wi] == nullptr) {
+                cache_[i] = false;
                 return false;
             }
             if (tmp->child_[wi]->isEnd_) {
@@ -56,12 +61,14 @@ class Solution {
             }
             tmp = tmp->child_[wi];
         }
+        cache_[index] = false;
         return false;
     }
 
 public:
     bool wordBreak(string s, vector<string>& wordDict) {
         root_ = new TrieNode();
+        cache_ = vector<int>(s.length(), -1);
         for (auto& word : wordDict) {
             Add(word);
         }
@@ -72,8 +79,8 @@ public:
 
 void TestForSplitWord() {
     auto* obj = new split_word::Solution();
-    string s = "catsandog";
-    vector<string> dict{"cats", "dog", "sand", "and", "cat", "og"};
+    string s = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab";
+    vector<string> dict{"a","aa","aaa","aaaa","aaaaa","aaaaaa","aaaaaaa","aaaaaaaa","aaaaaaaaa","aaaaaaaaaa"};
     auto res = obj->wordBreak(s, dict);
     printf("%d\n", res);
 }
