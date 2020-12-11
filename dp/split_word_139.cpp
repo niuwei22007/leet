@@ -51,15 +51,14 @@ class Solution {
         for (int i = index; i < s.length(); i++) {
             int wi = s[i] - 'a';
             if (tmp->child_[wi] == nullptr) {
-                cache_[i] = false;
+                // cache_[i] = false;
                 return false;
             }
             if (tmp->child_[wi]->isEnd_) {
-                if (DFS(s, i + 1)) {
-                    cache_[i + 1] = true;
+                cache_[i + 1] = DFS(s, i + 1);
+                if (cache_[i + 1]) {
                     return true;
                 }
-                cache_[i + 1] = false;
             }
             tmp = tmp->child_[wi];
         }
