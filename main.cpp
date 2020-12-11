@@ -9,7 +9,8 @@ int main() {
     // TestForExchangeStock5();
     // TestForDeleteAndEarn();
     // TestForMinSwap();
-    TestForSplitWord();
+    // TestForSplitWord();
+    TestForSplitWord2();
 
 
 

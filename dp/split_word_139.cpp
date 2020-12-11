@@ -68,7 +68,7 @@ class Solution {
 public:
     bool wordBreak(string s, vector<string>& wordDict) {
         root_ = new TrieNode();
-        cache_ = vector<int>(s.length(), -1);
+        cache_ = vector<int>(s.length() + 1, -1);
         for (auto& word : wordDict) {
             Add(word);
         }
