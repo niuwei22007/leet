@@ -32,7 +32,8 @@
 // void TestForExchangeStock4();
 // void TestForExchangeStock5();
 // void TestForDeleteAndEarn();
-void TestForMinSwap();
+// void TestForMinSwap();
+void TestForSplitWord();
 
 
 
