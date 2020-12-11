@@ -56,8 +56,10 @@ class Solution {
             }
             if (tmp->child_[wi]->isEnd_) {
                 if (DFS(s, i + 1)) {
+                    cache_[i + 1] = true;
                     return true;
                 }
+                cache_[i + 1] = false;
             }
             tmp = tmp->child_[wi];
         }
@@ -80,7 +82,7 @@ public:
 void TestForSplitWord() {
     auto* obj = new split_word::Solution();
     string s = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab";
-    vector<string> dict{"a","aa","aaa","aaaa","aaaaa","aaaaaa","aaaaaaa","aaaaaaaa","aaaaaaaaa","aaaaaaaaaa"};
+    vector<string> dict{"a", "aa", "aaa", "aaaa", "aaaaa", "aaaaaa", "aaaaaaa", "aaaaaaaa", "aaaaaaaaa", "aaaaaaaaaa"};
     auto res = obj->wordBreak(s, dict);
     printf("%d\n", res);
 }
