@@ -12,6 +12,10 @@
 
 using namespace std;
 namespace split_word2 {
+/**
+ * https://leetcode-cn.com/contest/biweekly-contest-41/
+ */
+
 class Solution {
 public:
     int countConsistentStrings(string allowed, vector<string>& words) {
