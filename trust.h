@@ -34,7 +34,8 @@
 // void TestForDeleteAndEarn();
 // void TestForMinSwap();
 // void TestForSplitWord();
-void TestForSplitWord2();
+// void TestForSplitWord2();
+void TestForRaceCar();
 
 
 

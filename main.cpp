@@ -10,7 +10,8 @@ int main() {
     // TestForDeleteAndEarn();
     // TestForMinSwap();
     // TestForSplitWord();
-    TestForSplitWord2();
+    // TestForSplitWord2();
+    TestForRaceCar();
 
 
 
