@@ -12,7 +12,8 @@ int main() {
     // TestForSplitWord();
     // TestForSplitWord2();
     // TestForRaceCar();
-    TestForMaxLengthSubSeq();
+    // TestForMaxLengthSubSeq();
+    TestForMaxLengthSubSeq2();
 
 
 

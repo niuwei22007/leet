@@ -35,7 +35,7 @@ public:
                 dp.push_back(nums[i]);
             } else {
                 int l = 0;
-                int r = dp.size() - 1;
+                int r = (int)dp.size() - 1;
                 int mid = (l + r) / 2;
                 while (l < r) {
                     if (dp[mid] >= nums[i]) {
