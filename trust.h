@@ -37,7 +37,8 @@
 // void TestForSplitWord2();
 // void TestForRaceCar();
 // void TestForMaxLengthSubSeq();
-void TestForMaxLengthSubSeq2();
+// void TestForMaxLengthSubSeq2();
+void TestForRegular();
 
 
 
